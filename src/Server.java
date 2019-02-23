@@ -6,7 +6,8 @@ public class Server {
 
     static final int PORT = 45954;
 
-    public static void main(String args[]) {
+    @SuppressWarnings("resource")
+	public static void main(String args[]) {
         ServerSocket serverSocket = null;
         Socket socket = null;
 
@@ -16,7 +17,7 @@ public class Server {
             e.printStackTrace();
 
         }
-        System.out.println("OS160-Server-Base running on port: "+PORT);
+        System.out.println("[INFO] OS168-Server-Base running on port: "+PORT);
         while (true) {
             try {
                 socket = serverSocket.accept();
@@ -25,7 +26,7 @@ public class Server {
             }
             // new thread for a client
             new EchoThread(socket).start();
-            System.out.println("New connection from: "+socket.getInetAddress().toString().replace("/", ""));
+            System.out.println("["+socket.getInetAddress().toString().replace("/", "")+"] "+" Connection opened");
         }
     }
 }
